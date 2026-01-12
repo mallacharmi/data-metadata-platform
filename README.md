@@ -110,6 +110,11 @@ data-metadata-platform/
 └── README.md
 ```
 
+### Simple Architecture Diagram
+Pipeline → Flask API → PostgreSQL
+           ↑
+      OpenLineage events
+
 ---
 
 ## 🏁 Status
