@@ -1,0 +1,6 @@
+checks for sample_dataset:
+  - row_count >= 0
+  - missing_count(product_id) = 0
+  - missing_count(product_name) = 0
+  - duplicate_count(product_id) = 0
+  - min(price) >= 0

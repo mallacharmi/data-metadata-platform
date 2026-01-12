@@ -1,0 +1,4 @@
+pandas
+requests
+soda-core-postgres
+soda-core

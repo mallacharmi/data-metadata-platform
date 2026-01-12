@@ -1,0 +1,8 @@
+data_source metadata_source:
+  type: postgres
+  host: metadata-postgres
+  port: 5432
+  username: postgres
+  password: postgres
+  database: metadata
+  schema: public

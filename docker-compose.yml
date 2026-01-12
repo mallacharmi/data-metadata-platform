@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  metadata-postgres:
+    image: postgres:15
+    container_name: metadata-postgres
+    environment:
+      POSTGRES_DB: metadata
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  metadata-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: metadata-api
+    ports:
+      - "5000:5000"
+    depends_on:
+      metadata-postgres:
+        condition: service_healthy
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile.pipeline
+    volumes:
+      - ./data:/data
+    depends_on:
+      metadata-api:
+        condition: service_started

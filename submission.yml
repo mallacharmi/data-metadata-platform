@@ -1,0 +1,14 @@
+setup:
+  - docker-compose down -v --remove-orphans
+  - docker-compose up --build -d
+
+run:
+  - sleep 5
+  - docker-compose run pipeline
+
+test:
+  - curl http://localhost:5000/health
+  - curl "http://localhost:5000/search?q=sample"
+  - curl http://localhost:5000/datasets/1
+  - curl http://localhost:5000/datasets/1/lineage
+  - curl -f http://localhost:5000/health
